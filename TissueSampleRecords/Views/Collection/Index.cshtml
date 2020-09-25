@@ -1,0 +1,50 @@
+﻿@model IEnumerable<TissueSampleRecords.Models.CollectionModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <div style="margin-top:50px">
+
+
+        <p>
+            <a asp-action="Create" class="btn btn-success">Create New Collection</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Collection_Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Disease_Term)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Collection_Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Disease_Term)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
