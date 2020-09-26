@@ -34,6 +34,7 @@ namespace TissueSampleRecords.Controllers
         {
             var collectionType = _db.Collections.Where(m => m.Id == id).FirstOrDefault();
             ViewBag.CollectionTitle = collectionType.Title;
+            ViewBag.CollectionId = collectionType.Id;
             return View();
         }
 
@@ -53,10 +54,61 @@ namespace TissueSampleRecords.Controllers
             _db.Samples.Add(newSample);
             _db.SaveChanges();
 
-            var sampleList = _db.Samples.OrderBy(m => m.Id).ToList();
+            var sampleList = _db.Samples.Where(m => m.Collection_Title == collectionTitle.Title).ToList();
            
             return View("Details", sampleList);
         }
 
+        // GET: Edit
+        public IActionResult Edit(int id)
+        {
+            var sample = _db.Samples.Where(m => m.Id == id).FirstOrDefault();
+            var collectionType = _db.Collections.Where(m => m.Title == sample.Collection_Title).FirstOrDefault();
+
+            ViewBag.CollectionTitle = collectionType.Title;
+            ViewBag.CollectionId = collectionType.Id;
+            return View(sample);
+        }
+        // POST: Edit
+        [HttpPost]
+        public IActionResult Edit(SampleModel sample)
+        {
+            var oldSample = _db.Samples.Where(m => m.Id == sample.Id).FirstOrDefault();
+            _db.Samples.Remove(oldSample);
+
+            sample.Collection_Title = oldSample.Collection_Title;
+            sample.Last_Updated = DateTime.Now.ToShortDateString();
+
+            _db.Samples.Add(sample);
+            _db.SaveChanges();
+
+            var sampleList = _db.Samples.Where(m => m.Collection_Title == sample.Collection_Title).ToList();
+
+            ViewBag.CollectionTitle = sample.Collection_Title;
+
+            return View("Details",sampleList);
+        }
+
+        // GET: Delete
+        public IActionResult Delete(int id)
+        {
+            var sample = _db.Samples.Where(m => m.Id == id).FirstOrDefault();
+            var collectionType = _db.Collections.Where(m => m.Title == sample.Collection_Title).FirstOrDefault();
+            ViewBag.CollectionId = collectionType.Id;
+            return View(sample);
+        }
+        // POST: Delete
+        [HttpPost]
+        [ActionName("Delete")]
+        public IActionResult DeleteSample(int id)
+        {
+            var sample = _db.Samples.Where(m => m.Id == id).FirstOrDefault();
+            _db.Samples.Remove(sample);
+            _db.SaveChanges();
+
+            var sampleList = _db.Samples.Where(m => m.Collection_Title == sample.Collection_Title).ToList();
+
+            return View("Details", sampleList);
+        }
     }
 }

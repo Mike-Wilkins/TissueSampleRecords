@@ -19,6 +19,7 @@ namespace TissueSampleRecords.Models
         [DisplayName("Last Updated")]
         public string Last_Updated { get; set; }
 
+        [DisplayName("Collection Type")]
         public string Collection_Title { get; set; }
     }
 }
