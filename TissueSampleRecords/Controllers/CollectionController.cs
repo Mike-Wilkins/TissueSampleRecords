@@ -2,6 +2,7 @@
 using System.Linq;
 using TissueSampleRecords.Models;
 using TissueSampleRecords.Services;
+using X.PagedList;
 
 namespace TissueSampleRecords.Controllers
 {
@@ -15,9 +16,10 @@ namespace TissueSampleRecords.Controllers
         }
 
         // GET: Collection List
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
-            var result = _db.Collections.OrderBy(m => m.Id).ToList();
+            var pageNumber = page ?? 1;
+            var result = _db.Collections.OrderBy(m => m.Id).ToList().ToPagedList(pageNumber, 4);
             return View(result);
         }
 

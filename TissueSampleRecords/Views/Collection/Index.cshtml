@@ -1,4 +1,10 @@
-﻿@model IEnumerable<TissueSampleRecords.Models.CollectionModel>
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core.Common;
+
+
+
+@model IPagedList<TissueSampleRecords.Models.CollectionModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,13 +20,13 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Collection_Id)
+                        @Html.DisplayNameFor(model => model.First().Collection_Id)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Disease_Term)
+                        @Html.DisplayNameFor(model => model.First().Disease_Term)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Title)
+                        @Html.DisplayNameFor(model => model.First().Title)
                     </th>
                     <th></th>
                 </tr>
@@ -47,4 +53,5 @@
                 }
             </tbody>
         </table>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions() { Display = X.PagedList.Web.Common.PagedListDisplayMode.IfNeeded })
     </div>

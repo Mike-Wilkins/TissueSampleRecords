@@ -1,4 +1,9 @@
-﻿@model IEnumerable<TissueSampleRecords.Models.SampleModel>
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core.Common;
+
+
+@model IPagedList<TissueSampleRecords.Models.SampleModel>
 
 @{
     ViewData["Title"] = "Details";
@@ -7,42 +12,44 @@
 <h3>Collection Type: @ViewBag.CollectionTitle</h3>
 
 <p>
-    <a asp-action="Create" asp-route-id="@ViewBag.CollectionId"class="btn btn-success">Add New Sample</a>
+    <a asp-action="Create" asp-route-id="@ViewBag.CollectionId" class="btn btn-success">Add New Sample</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Donor_Count)
+                @Html.DisplayNameFor(model => model.First().Donor_Count)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Material_Type)
+                @Html.DisplayNameFor(model => model.First().Material_Type)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Last_Updated)
+                @Html.DisplayNameFor(model => model.First().Last_Updated)
             </th>
-            
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Donor_Count)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Material_Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Last_Updated)
-            </td>
-           
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edit</a>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Donor_Count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Material_Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Last_Updated)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@Html.PagedListPager(Model, page => Url.Action("Details", new { page }), new PagedListRenderOptions() { Display = X.PagedList.Web.Common.PagedListDisplayMode.IfNeeded })

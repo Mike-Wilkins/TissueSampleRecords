@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using TissueSampleRecords.Models;
 using TissueSampleRecords.Services;
+using X.PagedList;
 
 namespace TissueSampleRecords.Controllers
 {
@@ -19,12 +17,14 @@ namespace TissueSampleRecords.Controllers
         }
 
         // GET: Sample Details
-        public IActionResult Details(int id)
+        public IActionResult Details(int id, int? page)
         {
             var collectionType = _db.Collections.Where(m => m.Id == id).FirstOrDefault();
             ViewBag.CollectionTitle = collectionType.Title;
             ViewBag.CollectionId = collectionType.Id;
-            var sampleList = _db.Samples.Where(m => m.Collection_Title == collectionType.Title).ToList();
+
+            var pageNumber = page ?? 1;
+            var sampleList = _db.Samples.Where(m => m.Collection_Title == collectionType.Title).ToList().ToPagedList(pageNumber, 5);
 
             return View(sampleList);
         }
@@ -57,9 +57,9 @@ namespace TissueSampleRecords.Controllers
             ViewBag.CollectionId = collectionTitle.Collection_Title;
 
             var sampleList = _db.Samples.Where(m => m.Collection_Title == collectionTitle.Collection_Title).ToList();
-           
+
             return View("Details", sampleList);
-           
+
         }
 
         // GET: Edit
@@ -90,7 +90,7 @@ namespace TissueSampleRecords.Controllers
             ViewBag.CollectionTitle = sample.Collection_Title;
             ViewBag.CollectionId = sample.Id;
 
-            return View("Details",sampleList);
+            return View("Details", sampleList);
         }
 
         // GET: Delete
