@@ -32,8 +32,8 @@ namespace TissueSampleRecords.Controllers
         // GET: Create
         public IActionResult Create(int id)
         {
-            var collectionType = _db.Collections.Where(m => m.Id == id).FirstOrDefault();
-            ViewBag.CollectionTitle = collectionType.Title;
+            var collectionType = _db.Samples.Where(m => m.Id == id).FirstOrDefault();
+            ViewBag.CollectionTitle = collectionType.Collection_Title;
             ViewBag.CollectionId = collectionType.Id;
             return View();
         }
@@ -42,21 +42,24 @@ namespace TissueSampleRecords.Controllers
         [HttpPost]
         public IActionResult Create(SampleModel sample)
         {
-            var collectionTitle = _db.Collections.Where(m => m.Id == sample.Id).FirstOrDefault();
+            var collectionTitle = _db.Samples.Where(m => m.Id == sample.Id).FirstOrDefault();
 
             var newSample = new SampleModel();
 
             newSample.Donor_Count = sample.Donor_Count;
             newSample.Material_Type = sample.Material_Type;
-            newSample.Collection_Title = collectionTitle.Title;
+            newSample.Collection_Title = collectionTitle.Collection_Title;
             newSample.Last_Updated = DateTime.Now.ToShortDateString();
 
             _db.Samples.Add(newSample);
             _db.SaveChanges();
 
-            var sampleList = _db.Samples.Where(m => m.Collection_Title == collectionTitle.Title).ToList();
+            ViewBag.CollectionId = collectionTitle.Collection_Title;
+
+            var sampleList = _db.Samples.Where(m => m.Collection_Title == collectionTitle.Collection_Title).ToList();
            
             return View("Details", sampleList);
+           
         }
 
         // GET: Edit
@@ -85,6 +88,7 @@ namespace TissueSampleRecords.Controllers
             var sampleList = _db.Samples.Where(m => m.Collection_Title == sample.Collection_Title).ToList();
 
             ViewBag.CollectionTitle = sample.Collection_Title;
+            ViewBag.CollectionId = sample.Id;
 
             return View("Details",sampleList);
         }
