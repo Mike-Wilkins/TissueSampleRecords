@@ -33,7 +33,7 @@ namespace TissueSampleRecords.Controllers
         }
         [HttpPost]
         // POST: Create
-        public IActionResult Create(CollectionModel collection)
+        public IActionResult Create(CollectionModel collection, int? page)
         {
             if (!ModelState.IsValid)
             {
@@ -43,7 +43,8 @@ namespace TissueSampleRecords.Controllers
             _db.Collections.Add(collection);
             _db.SaveChanges();
 
-            var collectionList = _db.Collections.OrderBy(m => m.Id).ToList();
+            var pageNumber = page ?? 1;
+            var collectionList = _db.Collections.OrderBy(m => m.Id).ToList().ToPagedList(pageNumber, 4);
 
             return View("Index", collectionList);
         }
@@ -58,13 +59,15 @@ namespace TissueSampleRecords.Controllers
 
         // POST: Edit
         [HttpPost]
-        public IActionResult Edit(CollectionModel collection)
+        public IActionResult Edit(CollectionModel collection, int? page)
         {
             var oldCollection = _db.Collections.Where(m => m.Id == collection.Id).FirstOrDefault();
             _db.Collections.Remove(oldCollection);
             _db.Collections.Add(collection);
             _db.SaveChanges();
-            var collectionList = _db.Collections.OrderBy(m => m.Id).ToList();
+
+            var pageNumber = page ?? 1;
+            var collectionList = _db.Collections.OrderBy(m => m.Id).ToList().ToPagedList(pageNumber, 4);
 
             return View("Index", collectionList);
         }
@@ -78,13 +81,14 @@ namespace TissueSampleRecords.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
-        public IActionResult DeleteCollection(int id)
+        public IActionResult DeleteCollection(int id, int? page)
         {
             var collection = _db.Collections.Where(m => m.Id == id).FirstOrDefault();
             _db.Remove(collection);
             _db.SaveChanges();
 
-            var collectionList = _db.Collections.OrderBy(m => m.Id).ToList();
+            var pageNumber = page ?? 1;
+            var collectionList = _db.Collections.OrderBy(m => m.Id).ToList().ToPagedList(pageNumber, 4);
             return View("Index", collectionList);
         }
         // POST: Delete

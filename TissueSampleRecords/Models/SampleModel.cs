@@ -8,6 +8,8 @@ namespace TissueSampleRecords.Models
         [Key]
         public int Id { get; set; }
 
+        public int Collection_Id { get; set; }
+
         [Required]
         [DisplayName("Donor Count")]
         public int Donor_Count { get; set; }

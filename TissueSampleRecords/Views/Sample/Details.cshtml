@@ -52,4 +52,4 @@
         }
     </tbody>
 </table>
-@Html.PagedListPager(Model, page => Url.Action("Details", new { page }), new PagedListRenderOptions() { Display = X.PagedList.Web.Common.PagedListDisplayMode.IfNeeded })
+@Html.PagedListPager(Model, page => Url.Action("Details", new { page = page, id = @ViewBag.CollectionId }), new PagedListRenderOptions() { Display = X.PagedList.Web.Common.PagedListDisplayMode.IfNeeded })
