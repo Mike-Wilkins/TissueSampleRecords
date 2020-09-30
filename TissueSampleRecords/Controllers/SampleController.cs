@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using TissueSampleRecords.Models;
 using TissueSampleRecords.Services;
 using X.PagedList;
@@ -17,14 +18,14 @@ namespace TissueSampleRecords.Controllers
         }
 
         // GET: Sample Details
-        public IActionResult Details(int id, int? page)
+        public async Task<IActionResult> Details(int id, int? page)
         {
             var collectionType = _db.Collections.Where(m => m.Collection_Id == id).FirstOrDefault();
             ViewBag.CollectionTitle = collectionType.Title;
             ViewBag.CollectionId = collectionType.Collection_Id;
 
             var pageNumber = page ?? 1;
-            var sampleList = _db.Samples.Where(m => m.Collection_Id == id).ToList().ToPagedList(pageNumber, 5);
+            var sampleList = await _db.Samples.Where(m => m.Collection_Id == id).ToPagedListAsync(pageNumber, 5);
             return View(sampleList);
         }
 
@@ -39,7 +40,7 @@ namespace TissueSampleRecords.Controllers
 
         // POST: Create
         [HttpPost]
-        public IActionResult Create(SampleModel sample, int? page, int id)
+        public async Task<IActionResult> Create(SampleModel sample, int? page, int id)
         {
             var collectionTitle = _db.Collections.Where(m => m.Collection_Id == id).FirstOrDefault();
 
@@ -58,7 +59,7 @@ namespace TissueSampleRecords.Controllers
             ViewBag.CollectionTitle = collectionTitle.Title;
 
             var pageNumber = page ?? 1;
-            var sampleList = _db.Samples.Where(m => m.Collection_Id == id).ToList().ToPagedList(pageNumber, 5);
+            var sampleList = await _db.Samples.Where(m => m.Collection_Id == id).ToPagedListAsync(pageNumber, 5);
 
             return View("Details", sampleList);
 
@@ -68,7 +69,6 @@ namespace TissueSampleRecords.Controllers
         public IActionResult Edit(int id)
         {
             var sample = _db.Samples.Where(m => m.Id == id).FirstOrDefault();
-            //var collectionType = _db.Collections.Where(m => m.Title == sample.Collection_Title).FirstOrDefault();
 
             ViewBag.CollectionTitle = sample.Collection_Title;
             ViewBag.CollectionId = sample.Collection_Id;
@@ -76,7 +76,7 @@ namespace TissueSampleRecords.Controllers
         }
         // POST: Edit
         [HttpPost]
-        public IActionResult Edit(SampleModel sample, int? page)
+        public async Task<IActionResult> Edit(SampleModel sample, int? page)
         {
             var oldSample = _db.Samples.Where(m => m.Id == sample.Id).FirstOrDefault();
             _db.Samples.Remove(oldSample);
@@ -89,7 +89,7 @@ namespace TissueSampleRecords.Controllers
             _db.SaveChanges();
 
             var pageNumber = page ?? 1;
-            var sampleList = _db.Samples.Where(m => m.Collection_Title == sample.Collection_Title).ToList().ToPagedList(pageNumber, 5);
+            var sampleList = await _db.Samples.Where(m => m.Collection_Title == sample.Collection_Title).ToPagedListAsync(pageNumber, 5);
 
             ViewBag.CollectionTitle = sample.Collection_Title;
             ViewBag.CollectionId = sample.Collection_Id;
@@ -108,14 +108,14 @@ namespace TissueSampleRecords.Controllers
         // POST: Delete
         [HttpPost]
         [ActionName("Delete")]
-        public IActionResult DeleteSample(int id, int? page)
+        public async Task<IActionResult> DeleteSample(int id, int? page)
         {
             var sample = _db.Samples.Where(m => m.Id == id).FirstOrDefault();
             _db.Samples.Remove(sample);
             _db.SaveChanges();
 
             var pageNumber = page ?? 1;
-            var sampleList = _db.Samples.Where(m => m.Collection_Title == sample.Collection_Title).ToList().ToPagedList(pageNumber, 5);
+            var sampleList = await _db.Samples.Where(m => m.Collection_Title == sample.Collection_Title).ToPagedListAsync(pageNumber, 5);
 
             ViewBag.CollectionTitle = sample.Collection_Title;
             ViewBag.CollectionId = sample.Collection_Id;

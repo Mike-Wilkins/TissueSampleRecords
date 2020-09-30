@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Threading.Tasks;
 using TissueSampleRecords.Models;
 using TissueSampleRecords.Services;
 using X.PagedList;
@@ -16,24 +17,24 @@ namespace TissueSampleRecords.Controllers
         }
 
         // GET: Collection List
-        public IActionResult Index(int? page)
+        public async Task<IActionResult> Index(int? page)
         {
             var pageNumber = page ?? 1;
-            var result = _db.Collections.OrderBy(m => m.Id).ToList().ToPagedList(pageNumber, 4);
+            var result = await _db.Collections.OrderBy(m => m.Id).ToPagedListAsync(pageNumber, 4);
             return View(result);
         }
 
         // GET: Create
         public IActionResult Create()
         {
-            var collectionId = _db.Collections.Max(m => m.Collection_Id);
+            var collectionId =  _db.Collections.Max(m => m.Collection_Id);
             var model = new CollectionModel();
             model.Collection_Id = collectionId + 1;
             return View(model);
         }
         [HttpPost]
         // POST: Create
-        public IActionResult Create(CollectionModel collection, int? page)
+        public async Task<IActionResult> Create(CollectionModel collection, int? page)
         {
             if (!ModelState.IsValid)
             {
@@ -44,7 +45,7 @@ namespace TissueSampleRecords.Controllers
             _db.SaveChanges();
 
             var pageNumber = page ?? 1;
-            var collectionList = _db.Collections.OrderBy(m => m.Id).ToList().ToPagedList(pageNumber, 4);
+            var collectionList = await _db.Collections.OrderBy(m => m.Id).ToPagedListAsync(pageNumber, 4);
 
             return View("Index", collectionList);
         }
@@ -59,7 +60,7 @@ namespace TissueSampleRecords.Controllers
 
         // POST: Edit
         [HttpPost]
-        public IActionResult Edit(CollectionModel collection, int? page)
+        public async Task<IActionResult> Edit(CollectionModel collection, int? page)
         {
             var oldCollection = _db.Collections.Where(m => m.Id == collection.Id).FirstOrDefault();
             _db.Collections.Remove(oldCollection);
@@ -67,7 +68,7 @@ namespace TissueSampleRecords.Controllers
             _db.SaveChanges();
 
             var pageNumber = page ?? 1;
-            var collectionList = _db.Collections.OrderBy(m => m.Id).ToList().ToPagedList(pageNumber, 4);
+            var collectionList = await _db.Collections.OrderBy(m => m.Id).ToPagedListAsync(pageNumber, 4);
 
             return View("Index", collectionList);
         }
@@ -81,7 +82,7 @@ namespace TissueSampleRecords.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
-        public IActionResult DeleteCollection(int id, int? page)
+        public async Task<IActionResult> DeleteCollection(int id, int? page)
         {
             var collection = _db.Collections.Where(m => m.Collection_Id == id).FirstOrDefault();
             _db.Remove(collection);
@@ -92,7 +93,7 @@ namespace TissueSampleRecords.Controllers
             _db.SaveChanges();
 
             var pageNumber = page ?? 1;
-            var collectionList = _db.Collections.OrderBy(m => m.Id).ToList().ToPagedList(pageNumber, 4);
+            var collectionList = await _db.Collections.OrderBy(m => m.Id).ToPagedListAsync(pageNumber, 4);
             return View("Index", collectionList);
         }
         // POST: Delete
