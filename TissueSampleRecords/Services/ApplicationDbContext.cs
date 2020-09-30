@@ -1,21 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TissueSampleRecords.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using TissueSampleRecords.Models;
+using TissueSampleRecords.Services;
 
 namespace TissueSampleRecords.Services
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
-        public DbSet<CollectionModel> Collections { get; set; }
         public DbSet<SampleModel> Samples { get; set; }
+        public DbSet<CollectionModel> Collections { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
 
         }
+
+        
     }
 }
+

@@ -26,6 +26,7 @@ namespace TissueSampleRecords
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(@"Data Source=.\SQLEXPRESS; Initial Catalog=TissueSamplesDbCore; Integrated Security=True"));
+            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
             services.AddControllersWithViews();
         }
 

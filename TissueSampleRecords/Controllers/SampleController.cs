@@ -9,9 +9,9 @@ namespace TissueSampleRecords.Controllers
 {
     public class SampleController : Controller
     {
-        private ApplicationDbContext _db;
+        private IApplicationDbContext _db;
 
-        public SampleController(ApplicationDbContext db)
+        public SampleController(IApplicationDbContext db)
         {
             _db = db;
         }
@@ -54,7 +54,7 @@ namespace TissueSampleRecords.Controllers
             _db.Samples.Add(newSample);
             _db.SaveChanges();
 
-            ViewBag.CollectionId = collectionTitle.Id;
+            ViewBag.CollectionId = collectionTitle.Collection_Id;
             ViewBag.CollectionTitle = collectionTitle.Title;
 
             var pageNumber = page ?? 1;

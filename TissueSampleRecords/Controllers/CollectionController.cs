@@ -8,9 +8,9 @@ namespace TissueSampleRecords.Controllers
 {
     public class CollectionController : Controller
     {
-        private ApplicationDbContext _db;
+        private IApplicationDbContext _db;
 
-        public CollectionController(ApplicationDbContext db)
+        public CollectionController(IApplicationDbContext db)
         {
             _db = db;
         }
@@ -75,7 +75,7 @@ namespace TissueSampleRecords.Controllers
         // GET: Delete
         public IActionResult Delete(int id)
         {
-            var collection = _db.Collections.Where(m => m.Id == id).FirstOrDefault();
+            var collection = _db.Collections.Where(m => m.Collection_Id == id).FirstOrDefault();
             return View(collection);
         }
 
@@ -83,8 +83,12 @@ namespace TissueSampleRecords.Controllers
         [ActionName("Delete")]
         public IActionResult DeleteCollection(int id, int? page)
         {
-            var collection = _db.Collections.Where(m => m.Id == id).FirstOrDefault();
+            var collection = _db.Collections.Where(m => m.Collection_Id == id).FirstOrDefault();
             _db.Remove(collection);
+
+            var deleteSamples = _db.Samples.Where(m => m.Collection_Id == collection.Collection_Id);
+            _db.Samples.RemoveRange(deleteSamples);
+
             _db.SaveChanges();
 
             var pageNumber = page ?? 1;
