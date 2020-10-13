@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TissueSampleRecords.Repositories;
 using TissueSampleRecords.Services;
 
 namespace TissueSampleRecords
@@ -27,6 +28,8 @@ namespace TissueSampleRecords
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(@"Data Source=.\SQLEXPRESS; Initial Catalog=TissueSamplesDbCore; Integrated Security=True"));
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+            services.AddScoped<ICollectionRepository, SQLCollectionRepository>();
+            services.AddScoped<ISampleRepository, SQLSampleRepository>();
             services.AddControllersWithViews();
         }
 
