@@ -13,6 +13,8 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Collection_Title" value="@ViewBag.CollectionTitle" />
+            <input type="hidden" asp-for="Last_Updated" value="@DateTime.Now.ToShortDateString()" />
             <div class="form-group">
                 <label asp-for="Donor_Count" class="control-label"></label>
                 <input asp-for="Donor_Count" class="form-control" />

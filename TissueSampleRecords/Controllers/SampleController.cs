@@ -47,21 +47,15 @@ namespace TissueSampleRecords.Controllers
         public async Task<IActionResult> Create(SampleModel sample, int? page, int id)
         {
             var collections = _db.GetCollection(id);
-
-            var newSample = new SampleModel();
-            newSample.Collection_Id = id;
-            newSample.Donor_Count = sample.Donor_Count;
-            newSample.Material_Type = sample.Material_Type;
-            newSample.Collection_Title = collections.Title;
-            newSample.Last_Updated = DateTime.Now.ToShortDateString();
-
-            _db.Add(newSample);
+           
+            sample.Collection_Id = id;
+            sample.Id = 0;
+            _db.Add(sample);
 
             ViewBag.CollectionId = collections.Collection_Id;
             ViewBag.CollectionTitle = collections.Title;
 
             var samples = _db.GetAllSamples();
-
             var pageNumber = page ?? 1;
             var sampleList = await samples.Where(m => m.Collection_Id == id).ToPagedListAsync(pageNumber, 5);
 
