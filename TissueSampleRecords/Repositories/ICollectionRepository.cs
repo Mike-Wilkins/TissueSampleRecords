@@ -12,6 +12,7 @@ namespace TissueSampleRecords.Repositories
         IEnumerable<CollectionModel> GetAllCollections();
         CollectionModel Add(CollectionModel collection);
         CollectionModel Delete(int id);
+        CollectionModel Update(CollectionModel collectionChanges);
         
     }
 }

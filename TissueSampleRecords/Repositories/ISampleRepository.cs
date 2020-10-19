@@ -15,5 +15,7 @@ namespace TissueSampleRecords.Repositories
         SampleModel Add(SampleModel collection);
         SampleModel Delete(int id);
         CollectionModel GetCollection(int id);
+        SampleModel Update(SampleModel sampleChanges);
+
     }
 }

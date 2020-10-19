@@ -82,19 +82,9 @@ namespace TissueSampleRecords.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(SampleModel sample, int? page)
         {
+            _db.Update(sample);
             var oldSample = _db.GetSample(sample.Id);
-            _db.Delete(oldSample.Id);
-
-            var editedSample = new SampleModel();
-
-            editedSample.Collection_Id = oldSample.Collection_Id;
-            editedSample.Collection_Title = oldSample.Collection_Title;
-            editedSample.Last_Updated = DateTime.Now.ToShortDateString();
-            editedSample.Material_Type = sample.Material_Type;
-            editedSample.Donor_Count = sample.Donor_Count;
-
-            _db.Add(editedSample);
-
+            
             var samples = _db.GetAllSamples();
 
             var pageNumber = page ?? 1;

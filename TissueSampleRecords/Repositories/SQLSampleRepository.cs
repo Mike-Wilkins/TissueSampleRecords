@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using TissueSampleRecords.Models;
@@ -34,6 +33,14 @@ namespace TissueSampleRecords.Repositories
                 _context.SaveChanges();
             }
             return sample;
+        }
+
+        public SampleModel Update(SampleModel sampleChanges)
+        {
+            var sample = _context.Samples.Attach(sampleChanges);
+            sample.State = EntityState.Modified;
+            _context.SaveChanges();
+            return sampleChanges;
         }
 
         public IEnumerable<SampleModel> GetAllSamples()

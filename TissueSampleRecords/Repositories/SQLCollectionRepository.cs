@@ -33,6 +33,14 @@ namespace TissueSampleRecords.Repositories
             return collection;
         }
 
+        public CollectionModel Update(CollectionModel collectionChanges)
+        {
+            var collection = _context.Collections.Attach(collectionChanges);
+            collection.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges();
+            return collectionChanges;
+        }
+
         public IEnumerable<CollectionModel> GetAllCollections()
         {
             return _context.Collections;

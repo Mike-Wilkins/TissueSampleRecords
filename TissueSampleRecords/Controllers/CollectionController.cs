@@ -66,16 +66,7 @@ namespace TissueSampleRecords.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(CollectionModel collection, int? page)
         {
-            
-            _db.Delete(collection.Collection_Id);
-
-            var editedCollectionDetails = new CollectionModel();
-
-            editedCollectionDetails.Collection_Id = collection.Collection_Id;
-            editedCollectionDetails.Disease_Term = collection.Disease_Term;
-            editedCollectionDetails.Title = collection.Title;
-
-            _db.Add(editedCollectionDetails);
+            _db.Update(collection);
 
             var pageNumber = page ?? 1;
             var collections = _db.GetAllCollections();
