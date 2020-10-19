@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TissueSampleRecords", "TissueSampleRecords\TissueSampleRecords.csproj", "{932388AC-F4B8-4036-92AA-3B3DE9696DDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TissueSampleRecords", "TissueSampleRecords\TissueSampleRecords.csproj", "{932388AC-F4B8-4036-92AA-3B3DE9696DDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSampleRecords.Tests", "TestSampleRecords.Tests\TestSampleRecords.Tests.csproj", "{0B02E504-632C-43C5-8DDC-44C8D40AF751}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{932388AC-F4B8-4036-92AA-3B3DE9696DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{932388AC-F4B8-4036-92AA-3B3DE9696DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{932388AC-F4B8-4036-92AA-3B3DE9696DDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B02E504-632C-43C5-8DDC-44C8D40AF751}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B02E504-632C-43C5-8DDC-44C8D40AF751}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B02E504-632C-43C5-8DDC-44C8D40AF751}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B02E504-632C-43C5-8DDC-44C8D40AF751}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
