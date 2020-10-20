@@ -9,7 +9,7 @@ using Xunit;
 
 namespace TestSampleRecords.Tests
 {
-    public class UnitTest1
+    public class CollectionTests
     {
         List<CollectionModel> CollectionInMemoryDb()
         {
@@ -109,4 +109,6 @@ namespace TestSampleRecords.Tests
             return new SQLCollectionRepository(collectionDataContext);
         }
     }
+
+    
 }
