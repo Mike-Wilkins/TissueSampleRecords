@@ -4,12 +4,14 @@ ASP.NET Core Application | xUnit | Dependeny Injection | Repository Pattern
 ## Project Overview
 The Medical Tissue Sample Records application is a standard CRUD application targeted at the health service industry for keeping track of patient sample data.
 
+<p float="left">
+  <img src="https://github.com/Mike-Wilkins/TissueSampleRecords/blob/master/TissueSampleApp1.PNG" width="800">
+</p>
+
 ## Objectives and Learning Outcomes
 * The principle objectives of this investigation were to explore methods and design practices that promote the development of clean, robust, scalable code. This was achieved, in part, by introducing dependency injection and InMemory unit testing, and by deploying the Repository pattern to separate data access and business logic layers within each controller method.
 * The learning outcomes of this project proved very rewarding and emphasised the importance of deploying SOLID principles in modern software applications. Further project work will investigate the advantages of using Moq frameworks combined with xUnit during unit testing, and develop an application which deploys WebAPI services.
 
-<p float="left">
-  <img src="https://github.com/Mike-Wilkins/TissueSampleRecords/blob/master/TissueSampleApp1.PNG" width="800">
-</p>
+
 
 
