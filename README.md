@@ -9,7 +9,7 @@ The Medical Tissue Sample Records application is a standard CRUD application tar
 * The learning outcomes of this project proved very rewarding and emphasised the importance of deploying SOLID principles in modern software applications. Further project work will investigate the advantages of using Moq frameworks combined with xUnit during unit testing, and develop an application which deploys WebAPI services.
 
 <p float="left">
-  <img src="https://github.com/Mike-Wilkins/TissueSampleRecords/blob/master/TissueSampleApp1.PNG" width="150">
+  <img src="https://github.com/Mike-Wilkins/TissueSampleRecords/blob/master/TissueSampleApp1.PNG" width="400">
   
 </p>
 
