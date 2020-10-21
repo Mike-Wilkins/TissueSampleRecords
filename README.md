@@ -5,7 +5,7 @@ ASP.NET Core Application | xUnit | Dependeny Injection | Repository Pattern
 The Medical Tissue Sample Records application is a standard CRUD application targeted at the health service industry for keeping track of patient sample data.
 
 
-![Output sample](https://github.com/Mike-Wilkins/Tech-Events-Manager/blob/master/platform_images/techeventsmanager.gif)
+![Output sample](https://github.com/Mike-Wilkins/TissueSampleRecords/blob/master/TissueSampleApp.gif)
 
 
 
