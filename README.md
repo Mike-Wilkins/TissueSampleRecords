@@ -10,7 +10,6 @@ The Medical Tissue Sample Records application is a standard CRUD application tar
 
 <p float="left">
   <img src="https://github.com/Mike-Wilkins/TissueSampleRecords/blob/master/TissueSampleApp1.PNG" width="800">
-  
 </p>
 
-![Output sample](https://github.com/Mike-Wilkins/TissueSampleRecords/blob/master/4ja5xj.gif)
+
