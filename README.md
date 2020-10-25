@@ -8,7 +8,7 @@ The Medical Tissue Sample Records application is a standard CRUD application tar
 
 ## Objectives and Learning Outcomes
 * The principle objectives of this investigation were to explore methods and design practices that promote the development of clean, robust, scalable code. This was achieved, in part, by introducing dependency injection and InMemory unit testing, and by deploying the Repository pattern to separate data access and business logic layers within each controller method.
-* The learning outcomes of this project proved very rewarding and emphasised the importance of deploying SOLID principles in modern software applications. Further project work will investigate the advantages of using Moq frameworks combined with xUnit during unit testing, and develop an application which deploys WebAPI services.
+* The learning outcomes of this project proved very rewarding and emphasised the importance of deploying SOLID principles in modern software applications. Further project work will expand on these principles by creating two separate projects for both data access and business logic layers.
 
 
 
