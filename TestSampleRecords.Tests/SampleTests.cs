@@ -1,7 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using TissueSampleRecords.Models;
 using TissueSampleRecords.Repositories;
 using TissueSampleRecords.Services;
@@ -120,7 +119,6 @@ namespace TestSampleRecords.Tests
             sampleDataContext.Database.EnsureDeleted();
             sampleDataContext.Database.EnsureCreated();
 
-            // return new SQLSampleRepository(sampleDataContext);
             return new SQLSampleRepository(sampleDataContext);
         }
     }

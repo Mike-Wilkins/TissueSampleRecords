@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TissueSampleRecords.Models;
 using TissueSampleRecords.Services;
 
@@ -25,7 +23,7 @@ namespace TissueSampleRecords.Repositories
         public CollectionModel Delete(int id)
         {
             CollectionModel collection = _context.Collections.Where(m => m.Collection_Id == id).FirstOrDefault();
-            if(collection != null)
+            if (collection != null)
             {
                 _context.Collections.Remove(collection);
                 _context.SaveChanges();
@@ -51,6 +49,6 @@ namespace TissueSampleRecords.Repositories
             CollectionModel collection = _context.Collections.Where(m => m.Collection_Id == id).FirstOrDefault();
             return collection;
         }
-       
+
     }
 }
